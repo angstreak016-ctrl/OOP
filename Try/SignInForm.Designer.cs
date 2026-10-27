@@ -36,6 +36,8 @@
             this.button1 = new Try.SignInForm.BorderedRoundButton();
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.outlinedButton1 = new Try.OutlinedButton();
+            this.outlinedButton2 = new Try.OutlinedButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -80,7 +82,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.outlinedButton2);
             this.panel1.Controls.Add(this.textBox2);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.textBox1);
@@ -99,7 +101,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Humato Heavy", 12F, System.Drawing.FontStyle.Bold);
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(68, 259);
+            this.button1.Location = new System.Drawing.Point(-13, 349);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(271, 46);
             this.button1.TabIndex = 4;
@@ -112,7 +114,7 @@
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.button2.Font = new System.Drawing.Font("Humato Heavy", 20F, System.Drawing.FontStyle.Bold);
             this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(729, 12);
+            this.button2.Location = new System.Drawing.Point(679, 11);
             this.button2.Name = "button2";
             this.button2.Padding = new System.Windows.Forms.Padding(3, 3, 0, 0);
             this.button2.Size = new System.Drawing.Size(49, 46);
@@ -132,12 +134,55 @@
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
+            // outlinedButton1
+            // 
+            this.outlinedButton1.BackColorEnd = System.Drawing.Color.Gold;
+            this.outlinedButton1.BackColorStart = System.Drawing.Color.Peru;
+            this.outlinedButton1.BorderRadius = 800;
+            this.outlinedButton1.Font = new System.Drawing.Font("Humato Heavy", 26F, System.Drawing.FontStyle.Bold);
+            this.outlinedButton1.ForeColor = System.Drawing.Color.White;
+            this.outlinedButton1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            this.outlinedButton1.HoverOutlineEndColor = System.Drawing.Color.Magenta;
+            this.outlinedButton1.HoverOutlineStartColor = System.Drawing.Color.Yellow;
+            this.outlinedButton1.IsPillShape = false;
+            this.outlinedButton1.Location = new System.Drawing.Point(734, 14);
+            this.outlinedButton1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
+            this.outlinedButton1.Name = "outlinedButton1";
+            this.outlinedButton1.OutlineColor = System.Drawing.Color.Black;
+            this.outlinedButton1.OutlineWidth = 5F;
+            this.outlinedButton1.Size = new System.Drawing.Size(45, 43);
+            this.outlinedButton1.TabIndex = 7;
+            this.outlinedButton1.Text = "x";
+            this.outlinedButton1.UseVisualStyleBackColor = true;
+            // 
+            // outlinedButton2
+            // 
+            this.outlinedButton2.BackColorEnd = System.Drawing.Color.Gold;
+            this.outlinedButton2.BackColorStart = System.Drawing.Color.Peru;
+            this.outlinedButton2.BorderRadius = 16;
+            this.outlinedButton2.Font = new System.Drawing.Font("Humato Heavy", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outlinedButton2.ForeColor = System.Drawing.Color.White;
+            this.outlinedButton2.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            this.outlinedButton2.HoverOutlineEndColor = System.Drawing.Color.Magenta;
+            this.outlinedButton2.HoverOutlineStartColor = System.Drawing.Color.Yellow;
+            this.outlinedButton2.IsPillShape = false;
+            this.outlinedButton2.Location = new System.Drawing.Point(69, 259);
+            this.outlinedButton2.Name = "outlinedButton2";
+            this.outlinedButton2.OutlineColor = System.Drawing.Color.Black;
+            this.outlinedButton2.OutlineWidth = 5F;
+            this.outlinedButton2.Size = new System.Drawing.Size(270, 46);
+            this.outlinedButton2.TabIndex = 4;
+            this.outlinedButton2.Text = "Log in";
+            this.outlinedButton2.UseVisualStyleBackColor = true;
+            // 
             // SignInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.outlinedButton1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel1);
@@ -162,5 +207,7 @@
         private BorderedRoundButton button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private OutlinedButton outlinedButton1;
+        private OutlinedButton outlinedButton2;
     }
 }

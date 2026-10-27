@@ -110,8 +110,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Class2.cs">
+    <Compile Include="ExampleNiSir.cs" />
+    <Compile Include="UiButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Class3.cs">

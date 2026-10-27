@@ -300,7 +300,7 @@ namespace Try
         private async void outlinedButton1_Click_1(object sender, EventArgs e)
         {
             SignInForm signupForm = new SignInForm();
-            await PanelAnimator.ShowFormInsidePanelAsync(signupForm, panel1, distance: 450);
+            await PanelAnimator.ShowFormInsidePanelAsync(signupForm, panel1, distance: 445);
         }
 
         private void outlinedButton2_Click(object sender, EventArgs e)

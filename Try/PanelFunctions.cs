@@ -64,7 +64,7 @@ public static class PanelAnimator
     }
 
     // NEW: Master method to handle the form and the panel animation together!
-    public static async Task ShowFormInsidePanelAsync(Form f, Panel host, int distance = 450)
+    public static async Task ShowFormInsidePanelAsync(Form f, Panel host, int distance = 400)
     {
         f.TopLevel = false;
         host.Visible = true;
