@@ -176,6 +176,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>GymDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Resources\videoplayback.wav" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

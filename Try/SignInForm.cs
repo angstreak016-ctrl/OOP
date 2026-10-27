@@ -99,5 +99,25 @@ namespace Try
             }
 
         }
+
+        private void outlinedButton1_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+            Close();
+        }
+
+        private void outlinedButton2_Click(object sender, EventArgs e)
+        {
+            bool isTrue = true;
+            if (isTrue == true)
+            {
+                MessageBox.Show("Log in Successfully!");
+            }
+            else
+            {
+                MessageBox.Show("Failed!");
+            }
+
+        }
     }
 }

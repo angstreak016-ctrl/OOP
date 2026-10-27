@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
+using Try.Properties;
+using static Try.MainMenu;
 
 namespace Try
 {
@@ -23,9 +26,12 @@ namespace Try
         public float OutlineWidth { get; set; } = 2.0f;
         public bool IsPillShape { get; set; } = false;
 
-        // Hover Outline Animation Colors (Yellow to Pink loop)
+        // Hover Outline Animation Colors (Yellow to Magenta loop)
         public Color HoverOutlineStartColor { get; set; } = Color.Yellow;
         public Color HoverOutlineEndColor { get; set; } = Color.Magenta;
+
+        // Sound Property (Path to your .wav file)
+        public string SoundFilePath { get; set; } = string.Empty;
 
         // Gradient Background Properties
         public Color BackColorStart { get; set; } = Color.Peru;
@@ -41,7 +47,7 @@ namespace Try
         // Click Scale Animation fields & Base size tracking
         private Timer _clickAnimationTimer;
         private float _currentScale = 1.0f;
-        private float _targetScale = 1.10f; // 20% larger growth
+        private float _targetScale = 1.10f; // 10% larger growth
         private bool _isExpanding = true;
 
         private int _originalWidth = 0;
@@ -54,7 +60,7 @@ namespace Try
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
 
-            // 1. Initialize outline color loop timer (~30 FPS)
+            // 1. Initialize outline color loop timer
             _colorAnimationTimer = new Timer();
             _colorAnimationTimer.Interval = 1;
             _colorAnimationTimer.Tick += (s, e) =>
@@ -106,6 +112,7 @@ namespace Try
                 }
                 ApplyAnimatedBounds();
                 Invalidate();
+
             };
         }
 
@@ -140,13 +147,37 @@ namespace Try
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            TriggerClickAnimation();
+            TriggerClickAction();
         }
 
         protected override void OnClick(EventArgs e)
         {
             base.OnClick(e);
+            TriggerClickAction();
+        }
+
+        private void TriggerClickAction()
+        {
+            PlaySound();
             TriggerClickAnimation();
+        }
+
+        private void PlaySound()
+        {
+            if (!string.IsNullOrEmpty(@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback.wav") && File.Exists(@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback.wav"))
+            {
+                try
+                {
+                    using (SoundPlayer player = new SoundPlayer(@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback.wav"))
+                    {
+                        player.Play();
+                    }
+                }
+                catch
+                {
+                    // Suppress audio exceptions if file is locked or invalid format
+                }
+            }
         }
 
         private void TriggerClickAnimation()
@@ -230,7 +261,7 @@ namespace Try
                 g.FillPath(backBrush, bgPath);
             }
 
-            // 2. Determine border color (loops between yellow and pink on hover, normal otherwise)
+            // 2. Determine border color (loops between yellow and magenta on hover, normal otherwise)
             Color currentOutlineColor = OutlineColor;
             if (_isHovered)
             {
@@ -307,5 +338,3 @@ namespace Try
         }
     }
 }
-
-       
