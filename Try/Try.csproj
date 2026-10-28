@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentTransitions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=121ceb2df72b2338, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentTransitions.1.1.1\lib\net45\FluentTransitions.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -111,6 +114,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExampleNiSir.cs" />
+    <Compile Include="LabelsOutline.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PanelRounded.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tries.Designer.cs">
+      <DependentUpon>Tries.cs</DependentUpon>
+    </Compile>
     <Compile Include="UiButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -148,6 +163,9 @@
     <EmbeddedResource Include="SignInForm.resx">
       <DependentUpon>SignInForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Tries.resx">
+      <DependentUpon>Tries.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -176,6 +194,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>GymDB.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\Untitled design.png" />
+    <None Include="Resources\Untitled design %281%29.png" />
+    <None Include="Resources\Untitled design %282%29.png" />
+    <Content Include="Resources\videoplayback %281%29.wav" />
     <Content Include="Resources\videoplayback.wav" />
   </ItemGroup>
   <ItemGroup>

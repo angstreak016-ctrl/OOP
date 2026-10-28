@@ -4,11 +4,15 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
+using System.Media;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinFormAnimationDotNet;
+
 
 
 namespace Try
@@ -150,10 +154,14 @@ namespace Try
         public Color FormGradientBottom { get; set; } = Color.Gold;
         public float FormGradientAngle { get; set; } = 90f;
         private Image bgImage;
+        [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
+        private static extern int mciSendString(string lpstrCommand, string lpstrReturnString, int uReturnLength, IntPtr hwndCallback);
         public MainMenu()
         {
+            this.Load += MainMenu_Load;
             bgImage = Properties.Resources.image_Photoroom;
             InitializeComponent();
+            this.Load += new EventHandler(MainMenu_Load);   
             this.SetStyle(ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true); panel1.BackColor = Color.Transparent;
         }
         protected override void OnPaint(PaintEventArgs e)
@@ -191,94 +199,56 @@ namespace Try
                 this.UpdateStyles();
             }
         }
-
-        //public static async Task SlidePanelUpSmoothAsync(Control control, int distance, int durationMs = 200)
-        //{
-        //    Color originalBackColor = control.BackColor;
-        //    control.BackColor = Color.Peru;
-        //    int startY = control.Top;
-        //    int targetY = startY - distance;
-        //    int frames = Math.Max(durationMs / 16, 1);
-
-        //    for (int i = 1; i <= frames; i++)
-        //    {
-        //        float progress = (float)i / frames;
-        //        // Ease-out curve for smooth deceleration
-        //        progress = (float)Math.Sin(progress * Math.PI / 2);
-
-        //        control.Top = (int)(startY + (targetY - startY) * progress);
-        //        await Task.Delay(16);
-        //    }
-        //    control.Top = targetY;
-        //    control.ResumeLayout(true);
-
-        //    // 3. ANIMATION DONE: Instantly restore the transparent backcolor
-        //    control.BackColor = originalBackColor;
-        //    control.Invalidate(true); // Force a clean final redraw
-        //}
-
-
-
-
-        //public static async Task SlidePanelDownSmoothAsync(Control control, int distance, int durationMs = 200)
-        //{
-        //    // 1. Save your original background color
-        //    Color originalBackColor = control.BackColor;
-
-        //    // 2. Switch to a solid theme color during motion to eliminate all jitter/tearing
-        //    control.BackColor = Color.Peru;
-
-        //    int startY = control.Top;
-        //    int targetY = startY + distance; // Plus distance moves it down
-        //    int frames = Math.Max(durationMs / 16, 1);
-
-        //    control.SuspendLayout();
-
-        //    for (int i = 1; i <= frames; i++)
-        //    {
-        //        float progress = (float)i / frames;
-        //        // Ease-out curve for smooth deceleration
-        //        progress = (float)Math.Sin(progress * Math.PI / 2);
-
-        //        // Move downward smoothly
-        //        control.Top = (int)(startY + (targetY - startY) * progress);
-        //        await Task.Delay(16);
-        //    }
-
-        //    control.Top = targetY;
-        //    control.ResumeLayout(true);
-
-        //    // 3. Animation finished: restore original background and hide the panel
-        //    control.BackColor = originalBackColor;
-        //    control.Invalidate(true); // Clean final redraw
-
-        //    // Hide it completely when it finishes sliding down out of view
-        //    control.Visible = false;
-        //}
-
-
-
-
         private void MainMenu_Load(object sender, EventArgs e)
         {
-
+            PlayStartupSound();
+            StartMciBackgroundMusic(@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback (1).wav");
         }
 
-        //private void ShowmemyForm(Form f, Panel host)
-        //{
-        //    f.FormClosed += (s, e) => SlidePanelDownSmoothAsync(host, 450); // Slide down when the form is closed
-        //    f.TopLevel = false;
-        //    host.Visible = true;
-        //    host.Controls.Add(f);
-        //    f.Show();            
-        //}
+        private void PlayStartupSound()
+        {
+            // Replace with the path to your .wav file
+            string soundPath = @"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback (1).wav";
 
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    SlidePanelUpSmoothAsync(panel1, 450);
-        //    ShowmemyForm(new SignInForm(), panel1);
-        //}
+            if (File.Exists(soundPath))
+            {
+                try
+                {
+                    using (SoundPlayer player = new SoundPlayer(soundPath))
+                    {
+                        // player.Play();     // Plays the sound asynchronously in the background
+                        player.Play();    // Plays the sound and waits for it to finish before loading the form fully
+                    }
+                }
+                catch
+                {
+                    // Suppress exceptions if the file is locked or invalid
+                }
+            }
+        }
 
+        private void StartMciBackgroundMusic(string filePath)
+        {
+            if (File.Exists(@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback (1).wav"))
+            {
+                // 1. Open the file as an alias "BGMusic"
+                string openCommand = $"open \"{@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback (1).wav"}\" type waveaudio alias BGMusic";
+                mciSendString(openCommand, null, 0, IntPtr.Zero);
+
+                // 2. Play the music and tell it to repeat (loop) indefinitely
+                string playCommand = "play BGMusic repeat";
+                mciSendString(playCommand, null, 0, IntPtr.Zero);
+            }
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            // Stop and close the music channel when closing the form
+            mciSendString("stop BGMusic", null, 0, IntPtr.Zero);
+            mciSendString("close BGMusic", null, 0, IntPtr.Zero);
+            base.OnFormClosed(e);
+        }
+      
         private async void button1_Click(object sender, EventArgs e)
         {
             SignInForm signupForm = new SignInForm();
@@ -306,6 +276,12 @@ namespace Try
         private void outlinedButton2_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void outlinedButton3_Click(object sender, EventArgs e)
+        {
+            Tries triesForm = new Tries();
+            triesForm.Show();
         }
     }
 }

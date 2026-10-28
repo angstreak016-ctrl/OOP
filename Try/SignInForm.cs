@@ -4,10 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
+using System.Media;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormAnimationDotNet;
 
 namespace Try
 {
@@ -77,9 +81,29 @@ namespace Try
 
         private void SignInForm_Load(object sender, EventArgs e)
         {
-
+            PlayStartupSound();
         }
+        private void PlayStartupSound()
+        {
+            // Replace with the path to your .wav file
+            string soundPath = @"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback (1).wav";
 
+            if (File.Exists(soundPath))
+            {
+                try
+                {
+                    using (SoundPlayer player = new SoundPlayer(soundPath))
+                    {
+                        // player.Play();     // Plays the sound asynchronously in the background
+                        player.Play();    // Plays the sound and waits for it to finish before loading the form fully
+                    }
+                }
+                catch
+                {
+                    // Suppress exceptions if the file is locked or invalid
+                }
+            }
+        }
         private void button2_Click(object sender, EventArgs e)
         {
             Visible = false;
@@ -117,6 +141,11 @@ namespace Try
             {
                 MessageBox.Show("Failed!");
             }
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
 
         }
     }
