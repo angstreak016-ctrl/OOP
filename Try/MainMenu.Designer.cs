@@ -33,6 +33,7 @@
             this.panel1 = new Try.MainMenu.SmoothPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.outlinedButton3 = new Try.OutlinedButton();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             this.outlinedButton1.HoverOutlineEndColor = System.Drawing.Color.Magenta;
             this.outlinedButton1.HoverOutlineStartColor = System.Drawing.Color.Yellow;
             this.outlinedButton1.IsPillShape = false;
-            this.outlinedButton1.Location = new System.Drawing.Point(305, 187);
+            this.outlinedButton1.Location = new System.Drawing.Point(305, 186);
             this.outlinedButton1.Name = "outlinedButton1";
             this.outlinedButton1.OutlineColor = System.Drawing.Color.Black;
             this.outlinedButton1.OutlineWidth = 5F;
@@ -114,7 +115,7 @@
             this.outlinedButton3.HoverOutlineEndColor = System.Drawing.Color.Magenta;
             this.outlinedButton3.HoverOutlineStartColor = System.Drawing.Color.Yellow;
             this.outlinedButton3.IsPillShape = false;
-            this.outlinedButton3.Location = new System.Drawing.Point(12, 187);
+            this.outlinedButton3.Location = new System.Drawing.Point(12, 186);
             this.outlinedButton3.Name = "outlinedButton3";
             this.outlinedButton3.OutlineColor = System.Drawing.Color.Black;
             this.outlinedButton3.OutlineWidth = 5F;
@@ -125,6 +126,13 @@
             this.outlinedButton3.UseVisualStyleBackColor = true;
             this.outlinedButton3.Click += new System.EventHandler(this.outlinedButton3_Click);
             // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(0, 442);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(801, 450);
+            this.panel2.TabIndex = 7;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -133,6 +141,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.outlinedButton3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
@@ -156,6 +165,7 @@
         private Try.OutlinedButton outlinedButton1;
         private Try.OutlinedButton outlinedButton2;
         private Try.OutlinedButton outlinedButton3;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 

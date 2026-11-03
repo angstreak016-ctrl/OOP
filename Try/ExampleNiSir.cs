@@ -14,11 +14,11 @@ namespace Try
 
         string constring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Ard\source\repos\Try\Try\GymDB.mdf;Integrated Security = True";
 
-        SqlConnection con;
-        SqlCommand cmd;
-        SqlDataAdapter da;
+        public SqlConnection con;
+        public SqlCommand cmd;
+        public SqlDataAdapter da;
 
-        void openConnection()
+        public void openConnection()
         {
             con = new SqlConnection(constring);
             try

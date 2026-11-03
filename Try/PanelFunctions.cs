@@ -1,80 +1,41 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-public static class PanelAnimator
+using FluentTransitions;
+public class PanelFormAnimator
 {
-    // Slide Up (Internal helper)
-    public static async Task SlideUpAsync(Control control, int distance, int durationMs = 80)
+    private int _originalTop;
+    private bool _isOriginalTopStored = false;
+    public void ShowFormInPanel(Form formToShow, Panel hostPanel, int slideDistance = 200)
     {
-        Color originalBackColor = control.BackColor;
-        control.BackColor = Color.Peru; // Solid color during motion to prevent jitter
-
-        int startY = control.Top;
-        int targetY = startY - distance;
-        int frames = Math.Max(durationMs / 16, 1);
-
-        control.SuspendLayout();
-
-        for (int i = 1; i <= frames; i++)
+        
+        if (!_isOriginalTopStored)
         {
-            float progress = (float)i / frames;
-            progress = (float)Math.Sin(progress * Math.PI / 2); // Ease-out curve
-
-            control.Top = (int)(startY + (targetY - startY) * progress);
-            await Task.Delay(16);
+            _originalTop = hostPanel.Top;
+            _isOriginalTopStored = true;
         }
+        formToShow.TopLevel = false;
+        formToShow.FormBorderStyle = FormBorderStyle.None;
+        formToShow.Dock = DockStyle.Fill;
 
-        control.Top = targetY;
-        control.ResumeLayout(true);
 
-        control.BackColor = originalBackColor;
-        control.Invalidate(true);
-    }
+        hostPanel.Controls.Clear();
+        hostPanel.Controls.Add(formToShow);
+        hostPanel.Visible = true;
 
-    // Slide Down (Internal helper)
-    public static async Task SlideDownAsync(Control control, int distance, int durationMs = 200)
-    {
-        Color originalBackColor = control.BackColor;
-        control.BackColor = Color.Peru; // Solid color during motion
+        formToShow.Show();
 
-        int startY = control.Top;
-        int targetY = startY + distance;
-        int frames = Math.Max(durationMs / 16, 1);
+        int targetTop = _originalTop - slideDistance;
 
-        control.SuspendLayout();
+        Transition.With(hostPanel, nameof(Panel.Top), targetTop)
+                  .EaseInEaseOut(TimeSpan.FromMilliseconds(400));
 
-        for (int i = 1; i <= frames; i++)
+        formToShow.FormClosed += (s, e) =>
         {
-            float progress = (float)i / frames;
-            progress = (float)Math.Sin(progress * Math.PI / 2); // Ease-out curve
-
-            control.Top = (int)(startY + (targetY - startY) * progress);
-            await Task.Delay(16);
-        }
-
-        control.Top = targetY;
-        control.ResumeLayout(true);
-
-        control.BackColor = originalBackColor;
-        control.Invalidate(true);
-
-        control.Visible = false; // Hide completely when finished sliding down
-    }
-
-    // NEW: Master method to handle the form and the panel animation together!
-    public static async Task ShowFormInsidePanelAsync(Form f, Panel host, int distance = 400)
-    {
-        f.TopLevel = false;
-        host.Visible = true;
-        f.FormBorderStyle = FormBorderStyle.None;
-        host.Controls.Add(f);
-        f.Show();
-        await SlideUpAsync(host, distance);
-        f.FormClosed += async (s, e) =>
-        {
-            await SlideDownAsync(host, distance);
+            Transition.With(hostPanel, nameof(Panel.Top), _originalTop)
+                      .EaseInEaseOut(TimeSpan.FromMilliseconds(500));
         };
     }
 }

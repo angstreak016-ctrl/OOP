@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
+using System.Media;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormAnimationDotNet;
 using FluentTransitions;
 
 namespace Try
@@ -22,23 +27,21 @@ namespace Try
         {
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-           panel1.Left = this.ClientSize.Width;
-
-            // 2. Animate it sliding into view on the left
-            Transition.With(panel1, nameof(Panel.Left), 100)
-                      .EaseInEaseOut(TimeSpan.FromMilliseconds(600));
-        }
-
         private void Try_Load(object sender, EventArgs e)
         {
             panel1.Left = this.ClientSize.Width;
 
-            // Animate it sliding into view
             Transition.With(panel1, nameof(Panel.Left), 100)
                       .EaseInEaseOut(TimeSpan.FromMilliseconds(600));
         }
+        private void button1_Click(object sender, EventArgs e)
+        {
+           panel1.Top = this.ClientSize.Height;
+
+            Transition.With(panel1, nameof(Panel.Top), 100)
+                      .EaseInEaseOut(TimeSpan.FromMilliseconds(600));
+        }
+
+        
     }
 }

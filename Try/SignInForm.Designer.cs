@@ -32,11 +32,11 @@
             this.outlinedButton1 = new Try.OutlinedButton();
             this.outlinedButton2 = new Try.OutlinedButton();
             this.roundedPanel1 = new Try.RoundedPanel();
-            this.outlinedLabel1 = new Try.OutlinedLabel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.outlinedLabel2 = new Try.OutlinedLabel();
+            this.outlinedLabel1 = new Try.OutlinedLabel();
+            this.txtpass = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtname = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.roundedPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -46,9 +46,9 @@
             this.pictureBox1.BackgroundImage = global::Try.Properties.Resources.image_Photoroom__1_;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(339, -5);
+            this.pictureBox1.Location = new System.Drawing.Point(238, -7);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(129, 60);
+            this.pictureBox1.Size = new System.Drawing.Size(320, 105);
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
@@ -63,7 +63,7 @@
             this.outlinedButton1.HoverOutlineEndColor = System.Drawing.Color.Magenta;
             this.outlinedButton1.HoverOutlineStartColor = System.Drawing.Color.Yellow;
             this.outlinedButton1.IsPillShape = false;
-            this.outlinedButton1.Location = new System.Drawing.Point(707, 44);
+            this.outlinedButton1.Location = new System.Drawing.Point(707, 79);
             this.outlinedButton1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 3);
             this.outlinedButton1.Name = "outlinedButton1";
             this.outlinedButton1.OutlineColor = System.Drawing.Color.Black;
@@ -107,20 +107,43 @@
             this.roundedPanel1.Controls.Add(this.outlinedLabel2);
             this.roundedPanel1.Controls.Add(this.outlinedButton2);
             this.roundedPanel1.Controls.Add(this.outlinedLabel1);
-            this.roundedPanel1.Controls.Add(this.textBox2);
+            this.roundedPanel1.Controls.Add(this.txtpass);
             this.roundedPanel1.Controls.Add(this.label1);
-            this.roundedPanel1.Controls.Add(this.textBox1);
-            this.roundedPanel1.Location = new System.Drawing.Point(59, 61);
+            this.roundedPanel1.Controls.Add(this.txtname);
+            this.roundedPanel1.Location = new System.Drawing.Point(59, 96);
             this.roundedPanel1.Name = "roundedPanel1";
             this.roundedPanel1.Size = new System.Drawing.Size(683, 341);
             this.roundedPanel1.TabIndex = 8;
+            // 
+            // outlinedLabel2
+            // 
+            this.outlinedLabel2.AutoSize = true;
+            this.outlinedLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.outlinedLabel2.BackColorEnd = System.Drawing.Color.Red;
+            this.outlinedLabel2.BackColorStart = System.Drawing.Color.Yellow;
+            this.outlinedLabel2.Font = new System.Drawing.Font("Humato Heavy", 25F, System.Drawing.FontStyle.Bold);
+            this.outlinedLabel2.ForeColor = System.Drawing.Color.White;
+            this.outlinedLabel2.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            this.outlinedLabel2.Location = new System.Drawing.Point(275, 13);
+            this.outlinedLabel2.Name = "outlinedLabel2";
+            this.outlinedLabel2.OutlineColor = System.Drawing.Color.Black;
+            this.outlinedLabel2.OutlineWidth = 5F;
+            this.outlinedLabel2.Size = new System.Drawing.Size(155, 47);
+            this.outlinedLabel2.TabIndex = 10;
+            this.outlinedLabel2.Text = "Sign In";
+            this.outlinedLabel2.TextColorEnd = System.Drawing.Color.Red;
+            this.outlinedLabel2.TextColorStart = System.Drawing.Color.Yellow;
+            this.outlinedLabel2.UseGradient = false;
             // 
             // outlinedLabel1
             // 
             this.outlinedLabel1.AutoSize = true;
             this.outlinedLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.outlinedLabel1.BackColorEnd = System.Drawing.Color.Red;
+            this.outlinedLabel1.BackColorStart = System.Drawing.Color.Yellow;
             this.outlinedLabel1.Font = new System.Drawing.Font("Humato Heavy", 15F, System.Drawing.FontStyle.Bold);
             this.outlinedLabel1.ForeColor = System.Drawing.Color.White;
+            this.outlinedLabel1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
             this.outlinedLabel1.Location = new System.Drawing.Point(469, 126);
             this.outlinedLabel1.Name = "outlinedLabel1";
             this.outlinedLabel1.OutlineColor = System.Drawing.Color.Black;
@@ -128,14 +151,17 @@
             this.outlinedLabel1.Size = new System.Drawing.Size(124, 28);
             this.outlinedLabel1.TabIndex = 8;
             this.outlinedLabel1.Text = "Password";
+            this.outlinedLabel1.TextColorEnd = System.Drawing.Color.Red;
+            this.outlinedLabel1.TextColorStart = System.Drawing.Color.Yellow;
+            this.outlinedLabel1.UseGradient = false;
             // 
-            // textBox2
+            // txtpass
             // 
-            this.textBox2.Font = new System.Drawing.Font("Humato Heavy", 12.75F, System.Drawing.FontStyle.Bold);
-            this.textBox2.Location = new System.Drawing.Point(449, 157);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(168, 28);
-            this.textBox2.TabIndex = 9;
+            this.txtpass.Font = new System.Drawing.Font("Humato Heavy", 12.75F, System.Drawing.FontStyle.Bold);
+            this.txtpass.Location = new System.Drawing.Point(449, 157);
+            this.txtpass.Name = "txtpass";
+            this.txtpass.Size = new System.Drawing.Size(168, 28);
+            this.txtpass.TabIndex = 9;
             // 
             // label1
             // 
@@ -149,27 +175,13 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Name";
             // 
-            // textBox1
+            // txtname
             // 
-            this.textBox1.Font = new System.Drawing.Font("Humato Heavy", 12.75F, System.Drawing.FontStyle.Bold);
-            this.textBox1.Location = new System.Drawing.Point(175, 159);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(221, 28);
-            this.textBox1.TabIndex = 6;
-            // 
-            // outlinedLabel2
-            // 
-            this.outlinedLabel2.AutoSize = true;
-            this.outlinedLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.outlinedLabel2.Font = new System.Drawing.Font("Humato Heavy", 25F, System.Drawing.FontStyle.Bold);
-            this.outlinedLabel2.ForeColor = System.Drawing.Color.White;
-            this.outlinedLabel2.Location = new System.Drawing.Point(275, 13);
-            this.outlinedLabel2.Name = "outlinedLabel2";
-            this.outlinedLabel2.OutlineColor = System.Drawing.Color.Black;
-            this.outlinedLabel2.OutlineWidth = 5F;
-            this.outlinedLabel2.Size = new System.Drawing.Size(155, 47);
-            this.outlinedLabel2.TabIndex = 10;
-            this.outlinedLabel2.Text = "Sign In";
+            this.txtname.Font = new System.Drawing.Font("Humato Heavy", 12.75F, System.Drawing.FontStyle.Bold);
+            this.txtname.Location = new System.Drawing.Point(175, 159);
+            this.txtname.Name = "txtname";
+            this.txtname.Size = new System.Drawing.Size(221, 28);
+            this.txtname.TabIndex = 6;
             // 
             // SignInForm
             // 
@@ -197,9 +209,9 @@
         private OutlinedButton outlinedButton2;
         private RoundedPanel roundedPanel1;
         private OutlinedLabel outlinedLabel1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtpass;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtname;
         private OutlinedLabel outlinedLabel2;
     }
 }
