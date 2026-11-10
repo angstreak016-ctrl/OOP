@@ -11,8 +11,12 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WinFormAnimationDotNet;
 using FluentTransitions;
+using NAudio;
+using NAudio.Wave;
+using WinFormAnimationDotNet;
+
+
 
 
 
@@ -20,6 +24,8 @@ namespace Try
 {
     public partial class MainMenu : Form
     {
+        private WaveOutEvent musicOut;
+        private AudioFileReader musicReader;
         Database db = new Database();
         public Color FormGradientTop { get; set; } = Color.Peru;
         public Color FormGradientBottom { get; set; } = Color.Gold;
@@ -68,33 +74,42 @@ namespace Try
                           ControlStyles.OptimizedDoubleBuffer, true); 
             panel1.BackColor = Color.Transparent;
         }
-        private void MainMenu_Load(object sender, EventArgs e)
+        public static class BgMusic
         {
-            PlayStartupSound();
-            panel2.Location = new Point(0, 450);
-        }
-
-        private void PlayStartupSound()
-        {
-            string soundPath = @"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback (1).wav";
-
-            if (File.Exists(soundPath))
+            private static WaveOutEvent musicOut;
+            private static AudioFileReader musicReader;
+            public static void Play(string filePath)
             {
-                try
+                if (musicOut != null && musicOut.PlaybackState == PlaybackState.Playing)
                 {
-                    using (SoundPlayer player = new SoundPlayer(soundPath))
-                    {
-                        
-                        player.Play();   
-                    }
+                    return;
                 }
-                catch
-                {
+                musicReader = new AudioFileReader(filePath);
+                musicOut = new WaveOutEvent();
+                musicOut.Init(musicReader);
+                musicOut.Play();
 
-                }
+                musicOut.PlaybackStopped += (s, args) =>
+                {
+                    musicReader.Position = 0; // Reset position to the beginning
+                    musicOut.Play(); // Play again
+                };
+            }
+            public static void Stop()
+            {
+                var o = musicOut;
+                musicOut = null;
+                o?.Stop();
+                o?.Dispose();
+                musicReader?.Dispose();
+                musicReader = null;
             }
         }
-
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            BgMusic.Play(@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback (1).wav");
+            panel2.Location = new Point(0, 450);
+        }
         private void outlinedButton1_Click(object sender, EventArgs e)
         {
 
@@ -114,8 +129,8 @@ namespace Try
 
         private void outlinedButton3_Click(object sender, EventArgs e)
         {
-            Tries triesForm = new Tries();
-            triesForm.Show();
+            ClientPanel Form1 = new ClientPanel();
+            Form1.Show();
         }
     }
 }

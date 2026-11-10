@@ -8,6 +8,8 @@ using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NAudio;
+using NAudio.Wave;
 using Try.Properties;
 using static Try.MainMenu;
 
@@ -15,6 +17,8 @@ namespace Try
 {
     public class OutlinedButton : Button
     {
+        private WaveOutEvent musicOut;
+        private AudioFileReader musicReader;
         private int _borderRadius = 16;
         public int BorderRadius
         {
@@ -164,20 +168,16 @@ namespace Try
 
         private void PlaySound()
         {
-            if (!string.IsNullOrEmpty(@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback.wav") && File.Exists(@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback.wav"))
+            var reader = new AudioFileReader(@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback.wav");
+            var output = new WaveOutEvent();
+            output.Init(reader);
+            output.Play();
+
+            output.PlaybackStopped += (s, e) =>
             {
-                try
-                {
-                    using (SoundPlayer player = new SoundPlayer(@"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback.wav"))
-                    {
-                        player.Play();
-                    }
-                }
-                catch
-                {
-                    // Suppress audio exceptions if file is locked or invalid format
-                }
-            }
+                output.Dispose();
+                reader.Dispose();
+            };
         }
 
         private void TriggerClickAnimation()

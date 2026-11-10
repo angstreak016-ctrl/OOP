@@ -33,30 +33,8 @@ namespace Try
 
         private void SignInForm_Load(object sender, EventArgs e)
         {
-            PlayStartupSound();
-        }
-        private void PlayStartupSound()
-        {
            
-            string soundPath = @"C:\Users\Ard\source\repos\Try\Try\Resources\videoplayback (1).wav";
-
-            if (File.Exists(soundPath))
-            {
-                try
-                {
-                    using (SoundPlayer player = new SoundPlayer(soundPath))
-                    {
-                        // player.Play();     
-                        player.Play();   
-                    }
-                }
-                catch
-                {
-                  
-                }
-            }
         }
-      
         private void outlinedButton1_Click(object sender, EventArgs e)
         {
             Visible = false;
@@ -89,11 +67,12 @@ namespace Try
 
                             if (role == "Admin")
                             {
-                                MessageBox.Show("Login Successful: Welcome Admin!", "Admin Portal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                object test = UserSession.Username = txtname.Text.Trim();
+                                MessageBox.Show($"Login Successful: Welcome Admin!", $"Admin {test}", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                                UserSession.Username = txtname.Text.Trim();
+                                
 
-                                Form1 adminForm = new Form1();
+                                ClientPanel adminForm = new ClientPanel();
                                 adminForm.Show();
 
                                 List<Form> formsToClose = new List<Form>();

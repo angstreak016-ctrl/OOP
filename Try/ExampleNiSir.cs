@@ -12,7 +12,7 @@ namespace Try
     class Database
     {
 
-        string constring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Ard\source\repos\Try\Try\GymDB.mdf;Integrated Security = True";
+        public string constring = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Ard\source\repos\Try\Try\GymDB.mdf;Integrated Security = True";
 
         public SqlConnection con;
         public SqlCommand cmd;

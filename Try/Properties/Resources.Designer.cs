@@ -63,6 +63,36 @@ namespace Try.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap brown_wood_textured_background_with_design_space {
+            get {
+                object obj = ResourceManager.GetObject("brown-wood-textured-background-with-design-space", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap d1e5fbcc_3551_41b5_9f8d_b828558c5657 {
+            get {
+                object obj = ResourceManager.GetObject("d1e5fbcc-3551-41b5-9f8d-b828558c5657", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap download {
+            get {
+                object obj = ResourceManager.GetObject("download", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap image_Photoroom {
             get {
                 object obj = ResourceManager.GetObject("image-Photoroom", resourceCulture);
@@ -76,6 +106,26 @@ namespace Try.Properties {
         internal static System.Drawing.Bitmap image_Photoroom__1_ {
             get {
                 object obj = ResourceManager.GetObject("image-Photoroom (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_2026_11_09_192235 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot 2026-11-09 192235", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_2026_11_09_192300 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot 2026-11-09 192300", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
