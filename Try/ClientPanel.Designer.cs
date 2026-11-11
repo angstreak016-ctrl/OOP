@@ -41,14 +41,12 @@
             this.outlinedButton3 = new Try.OutlinedButton();
             this.outlinedButton6 = new Try.OutlinedButton();
             this.gradientPanel2 = new Try.GradientPanel();
-            this.outlinedButton2 = new Try.OutlinedButton();
             this.gradientPanel1 = new Try.GradientPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.roundedPanel1.SuspendLayout();
             this.roundedPanel2.SuspendLayout();
-            this.gradientPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -227,6 +225,7 @@
             this.outlinedButton3.TabIndex = 13;
             this.outlinedButton3.Text = "Customize";
             this.outlinedButton3.UseVisualStyleBackColor = true;
+            this.outlinedButton3.Click += new System.EventHandler(this.outlinedButton3_Click);
             // 
             // outlinedButton6
             // 
@@ -252,34 +251,12 @@
             // 
             // gradientPanel2
             // 
-            this.gradientPanel2.Controls.Add(this.outlinedButton2);
             this.gradientPanel2.EndColor = System.Drawing.Color.Peru;
             this.gradientPanel2.Location = new System.Drawing.Point(0, 412);
             this.gradientPanel2.Name = "gradientPanel2";
             this.gradientPanel2.Size = new System.Drawing.Size(800, 48);
             this.gradientPanel2.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(33)))), ((int)(((byte)(1)))));
             this.gradientPanel2.TabIndex = 1;
-            // 
-            // outlinedButton2
-            // 
-            this.outlinedButton2.BackColorEnd = System.Drawing.Color.Gold;
-            this.outlinedButton2.BackColorStart = System.Drawing.Color.Peru;
-            this.outlinedButton2.BorderRadius = 16;
-            this.outlinedButton2.Font = new System.Drawing.Font("Humato Heavy", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.outlinedButton2.ForeColor = System.Drawing.Color.White;
-            this.outlinedButton2.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            this.outlinedButton2.HoverOutlineEndColor = System.Drawing.Color.Magenta;
-            this.outlinedButton2.HoverOutlineStartColor = System.Drawing.Color.Yellow;
-            this.outlinedButton2.IsPillShape = false;
-            this.outlinedButton2.Location = new System.Drawing.Point(645, 3);
-            this.outlinedButton2.Name = "outlinedButton2";
-            this.outlinedButton2.OutlineColor = System.Drawing.Color.Black;
-            this.outlinedButton2.OutlineWidth = 2F;
-            this.outlinedButton2.Size = new System.Drawing.Size(152, 34);
-            this.outlinedButton2.SoundFilePath = "";
-            this.outlinedButton2.TabIndex = 2;
-            this.outlinedButton2.Text = "Settings";
-            this.outlinedButton2.UseVisualStyleBackColor = true;
             // 
             // gradientPanel1
             // 
@@ -318,13 +295,11 @@
             this.panel1.ResumeLayout(false);
             this.roundedPanel1.ResumeLayout(false);
             this.roundedPanel2.ResumeLayout(false);
-            this.gradientPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private OutlinedButton outlinedButton2;
         private System.Windows.Forms.Panel panel2;
         private GradientPanel gradientPanel1;
         private GradientPanel gradientPanel2;

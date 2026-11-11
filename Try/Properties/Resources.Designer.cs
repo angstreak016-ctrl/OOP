@@ -63,6 +63,16 @@ namespace Try.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _5476189 {
+            get {
+                object obj = ResourceManager.GetObject("5476189", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap brown_wood_textured_background_with_design_space {
             get {
                 object obj = ResourceManager.GetObject("brown-wood-textured-background-with-design-space", resourceCulture);

@@ -13,17 +13,32 @@ namespace Try
 {
     public partial class Customize : Form
     {
+        private int textBoxCounter = 0;
         public Customize()
         {
             InitializeComponent();
         }
         private void Customize_Load(object sender, EventArgs e)
         {
-            LoadRankFilteredWorkouts();
+            flowLayoutPanel1.ControlAdded += flowLayoutPanel1_ControlAdded;
+            textBox1.Text = UserSession.Username;
+            LoadRankFilteredWorkouts(comboBox1);
         }
-        private void LoadRankFilteredWorkouts()
+        private void ClearComboBox(ComboBox cb)
         {
-            // 1. Get the logged-in username from our session helper
+            cb.SelectedIndex = -1;
+            cb.Text = string.Empty;
+        }
+        private void flowLayoutPanel1_ControlAdded(object sender, ControlEventArgs e)
+        {
+            if (e.Control is ComboBox cb)
+            {
+                LoadRankFilteredWorkouts(cb);
+            }
+        }
+        private void LoadRankFilteredWorkouts(ComboBox target)
+        {
+
             string currentUsername = UserSession.Username;
 
             if (string.IsNullOrEmpty(currentUsername))
@@ -39,7 +54,7 @@ namespace Try
             {
                 try
                 {
-                    // 2. Fetch the user's rank from the Users table (defaults to 0 if not set)
+
                     int userRank = 0;
                     string rankQuery = "SELECT userrank FROM Users WHERE username = @Username";
 
@@ -54,39 +69,38 @@ namespace Try
                         }
                     }
 
-                    // 3. Determine maximum workout points allowed based on their userrank
-                    // Since default is 0, rank 0 will fall into the beginner bracket.
-                    int maxPoints = 5; // Beginner tier (Points 1 to 5)
+                    int maxPoints = 5;
 
                     if (userRank >= 200 && userRank < 400)
                     {
-                        maxPoints = 12; // Intermediate tier (Points up to 12)
+                        maxPoints = 12;
                     }
                     else if (userRank >= 400)
                     {
-                        maxPoints = 20; // Advanced / Expert tier (All workouts unlocked up to 20)
+                        maxPoints = 20;
                     }
 
-                    // 4. Query the Workouts table filtering by points <= maxPoints
+
                     string workoutQuery = "SELECT name FROM Workouts WHERE points <= @MaxPoints";
 
                     using (SqlCommand workoutCmd = new SqlCommand(workoutQuery, db.con))
                     {
-                        workoutCmd.Parameters.AddWithValue("@MaxPoints", maxPoints);
+                            workoutCmd.Parameters.AddWithValue("@MaxPoints", maxPoints);
 
-                        SqlDataAdapter da = new SqlDataAdapter(workoutCmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
+                            SqlDataAdapter da = new SqlDataAdapter(workoutCmd);
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
 
-                        // 5. Bind the filtered list to your ComboBox (e.g., cbWorkouts)
-                        comboBox1.DataSource = dt;
-                        comboBox1.DisplayMember = "name"; // Column shown in dropdown
-                        comboBox1.ValueMember = "name";
+                            target.DataSource = dt;
+                            target.DisplayMember = "name";
+                            target.ValueMember = "name";
+                            target.SelectedIndex = -1;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error loading workouts: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error loading workouts: " + ex.Message, 
+                       "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -96,11 +110,10 @@ namespace Try
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Make sure a body part is actually selected
             if (comboBox1.SelectedItem == null) return;
 
             string selectedBodyPart = comboBox1.SelectedItem.ToString();
-            string loggedInUsername = textBox1.Text.Trim(); // Or from your active session variable
+            string loggedInUsername = textBox1.Text.Trim();
 
             Database db = new Database();
             db.openConnection();
@@ -109,7 +122,6 @@ namespace Try
             {
                 try
                 {
-                    // 1. Get the user's rank from the Users table
                     int userRank = 0;
                     string rankQuery = "SELECT UserRank FROM Users WHERE Username = @Username";
 
@@ -123,21 +135,16 @@ namespace Try
                             userRank = Convert.ToInt32(rankResult);
                         }
                     }
-
-                    // 2. Determine the maximum workout points allowed based on the user's rank
-                    // You can adjust these threshold rules however you like!
-                    int maxAllowedPoints = 5; // Default / Beginner tier (Rank 100-200)
+                    int maxAllowedPoints = 5;
 
                     if (userRank >= 300 && userRank <= 400)
                     {
-                        maxAllowedPoints = 12; // Intermediate tier
+                        maxAllowedPoints = 12;
                     }
                     else if (userRank > 400)
                     {
-                        maxAllowedPoints = 20; // Advanced / Expert tier (All workouts unlocked)
+                        maxAllowedPoints = 20;
                     }
-
-                    // 3. Query the Workouts table filtered by Body Part AND the user's Rank/Points limit
                     string workoutQuery = "SELECT name FROM Workouts WHERE bodypart = @Bodypart AND points <= @Points";
 
                     using (SqlCommand workoutCmd = new SqlCommand(workoutQuery, db.con))
@@ -145,20 +152,19 @@ namespace Try
                         workoutCmd.Parameters.AddWithValue("@Bodypart", selectedBodyPart);
                         workoutCmd.Parameters.AddWithValue("@Points", maxAllowedPoints);
 
-                        // Use a SqlDataAdapter and DataTable to fill the ComboBox
-                        SqlDataAdapter da = new SqlDataAdapter(workoutCmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
+                            SqlDataAdapter da = new SqlDataAdapter(workoutCmd);
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
 
-                        // Bind the filtered data to your workouts ComboBox
-                        comboBox1.DataSource = dt;
-                        comboBox1.DisplayMember = "name"; // The column name shown in the dropdown
-                        comboBox1.ValueMember = "name";
+                            comboBox1.DataSource = dt;
+                            comboBox1.DisplayMember = "name";
+                            comboBox1.ValueMember = "name";
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error loading workouts: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error loading workouts: " + ex.Message,
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
                 {
@@ -167,6 +173,74 @@ namespace Try
             }
         }
 
-       
+        private void outlinedButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void outlinedButton2_Click(object sender, EventArgs e)
+        {
+            textBoxCounter--;
+        }
+
+        private void outlinedButton3_Click(object sender, EventArgs e)
+        {
+            ComboBox newcBox = new ComboBox();
+
+            textBoxCounter++;
+            newcBox.Name = "combo" + textBoxCounter;
+            newcBox.Text = " " + textBoxCounter;
+            newcBox.Font = new Font("Humato Heavy", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+
+            newcBox.Size = new Size(214, 21);
+
+            flowLayoutPanel1.Controls.Add(newcBox);
+        }
+
+        private void outlinedButton4_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in flowLayoutPanel1.Controls)
+            {
+                if (c is ComboBox cb)
+                {
+                    ClearComboBox(cb);
+                }
+            }
+        }
+
+        private void outlinedButton5_Click(object sender, EventArgs e)
+        {
+            for (int i = flowLayoutPanel1.Controls.Count - 1; i >= 0; i--)
+            {
+                if (flowLayoutPanel1.Controls[i] is ComboBox cb)
+                {
+                    flowLayoutPanel1.Controls.Remove(cb);
+                    cb.Dispose();
+                    textBoxCounter--;
+                    break; // stop after removing one
+                }
+            }
+        }
+
+        private void outlinedButton6_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in flowLayoutPanel1.Controls)
+            {
+                if (c is ComboBox cb)
+                {
+                    ClearComboBox(cb);
+                }
+            }
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

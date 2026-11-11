@@ -68,7 +68,7 @@ namespace Try
                             if (role == "Admin")
                             {
                                 object test = UserSession.Username = txtname.Text.Trim();
-                                MessageBox.Show($"Login Successful: Welcome Admin!", $"Admin {test}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show($"Welcome back Admin", $"Admin {test}", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                                 
 
@@ -91,12 +91,27 @@ namespace Try
                             }
                             else if (role == "Client")
                             {
-                                MessageBox.Show("Login Successful: Welcome Client!", "Client Portal", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                object test = UserSession.Username = txtname.Text.Trim();
+                                MessageBox.Show($"Login Successful: Welcome {test}!", $"Client: {test}", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                                // TODO: Open your Client Dashboard Form here
-                                // ClientForm clientForm = new ClientForm();
-                                // clientForm.Show();
-                                // this.Hide();
+
+
+                                ClientPanel adminForm = new ClientPanel();
+                                adminForm.Show();
+
+                                List<Form> formsToClose = new List<Form>();
+                                foreach (Form frm in Application.OpenForms)
+                                {
+                                    if (frm != adminForm)
+                                    {
+                                        formsToClose.Add(frm);
+                                    }
+                                }
+
+                                foreach (Form frm in formsToClose)
+                                {
+                                    frm.Hide();
+                                }
                             }
                             else
                             {
